@@ -1,0 +1,24 @@
+[theme]
+base = "light"
+primaryColor = "#16a34a"
+backgroundColor = "#fffbf2"
+secondaryBackgroundColor = "#fff1d6"
+textColor = "#2b2a28"
+linkColor = "#ea580c"
+borderColor = "#f3d9a4"
+baseRadius = "large"
+font = "Poppins:https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+headingFont = "Poppins:https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+greenColor = "#16a34a"
+orangeColor = "#f97316"
+yellowColor = "#f59e0b"
+redColor = "#e11d48"
+blueColor = "#0284c7"
+chartCategoricalColors = ["#16a34a", "#f97316", "#f59e0b", "#0284c7", "#e11d48", "#8b5cf6"]
+
+[theme.sidebar]
+backgroundColor = "#14532d"
+secondaryBackgroundColor = "#166534"
+textColor = "#f0fdf4"
+borderColor = "#22c55e"
+primaryColor = "#fbbf24"

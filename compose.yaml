@@ -1,0 +1,10 @@
+services:
+  shopping-agent:
+    build: .
+    ports:
+      - "8502:8501"
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./resources:/app/resources
