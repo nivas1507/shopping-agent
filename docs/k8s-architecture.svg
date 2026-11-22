@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" font-family="Helvetica,Arial,sans-serif" font-size="13">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#444"/></marker></defs>
+<rect width="900" height="600" fill="#fff"/>
+<text x="450" y="28" text-anchor="middle" font-size="18" font-weight="bold">Fresh Cart shopping agent: Kubernetes (Docker Desktop)</text>
+<rect x="150" y="45" width="735" height="425" rx="10" fill="#f4f8ff" stroke="#326ce5" stroke-width="2"/>
+<text x="165" y="68" fill="#326ce5" font-weight="bold">Cluster: docker-desktop (default namespace)  |  nodes: desktop-control-plane, desktop-worker (v1.36.1)</text>
+
+<rect x="15" y="215" width="105" height="80" rx="8" fill="#fff" stroke="#444"/>
+<text x="67" y="245" text-anchor="middle" font-weight="bold">User</text><text x="67" y="263" text-anchor="middle" font-size="11">browser</text><text x="67" y="278" text-anchor="middle" font-size="11">localhost:8503</text>
+
+<rect x="175" y="205" width="160" height="100" rx="8" fill="#d9f0dc" stroke="#2e8b3d"/>
+<text x="255" y="228" text-anchor="middle" font-weight="bold">Service shopping-agent</text>
+<text x="255" y="247" text-anchor="middle" font-size="11">type: NodePort 30080</text>
+<text x="255" y="262" text-anchor="middle" font-size="11">port 80 → targetPort 8501</text>
+<text x="255" y="277" text-anchor="middle" font-size="11">sessionAffinity: ClientIP</text>
+<text x="255" y="292" text-anchor="middle" font-size="11">selector app=shopping-agent</text>
+
+<rect x="390" y="85" width="300" height="250" rx="8" fill="#fff" stroke="#326ce5" stroke-width="1.5"/>
+<text x="540" y="106" text-anchor="middle" font-weight="bold">Deployment shopping-agent</text>
+<text x="540" y="122" text-anchor="middle" font-size="11">replicas: 2, strategy: Recreate (on desktop-worker)</text>
+<rect x="410" y="135" width="260" height="85" rx="8" fill="#e8f0fe" stroke="#326ce5"/>
+<text x="540" y="157" text-anchor="middle" font-weight="bold">Pod 1</text>
+<text x="540" y="175" text-anchor="middle" font-size="11">image shopping-agent-shopping-agent:latest</text>
+<text x="540" y="190" text-anchor="middle" font-size="11">Streamlit :8501 (src/app.py) + LangChain agent</text>
+<text x="540" y="205" text-anchor="middle" font-size="11">readiness: /_stcore/health | 100m CPU, 256Mi-1Gi</text>
+<rect x="410" y="235" width="260" height="85" rx="8" fill="#e8f0fe" stroke="#326ce5"/>
+<text x="540" y="257" text-anchor="middle" font-weight="bold">Pod 2</text>
+<text x="540" y="275" text-anchor="middle" font-size="11">same image and settings as Pod 1</text>
+<text x="540" y="290" text-anchor="middle" font-size="11">shares the same SQLite volume</text>
+<text x="540" y="305" text-anchor="middle" font-size="11" fill="#c62828">risk: concurrent writes (db locked)</text>
+
+<rect x="740" y="95" width="130" height="75" rx="8" fill="#fde0e0" stroke="#c62828"/>
+<text x="805" y="120" text-anchor="middle" font-weight="bold">Secret</text>
+<text x="805" y="137" text-anchor="middle" font-size="11">shopping-agent-env</text>
+<text x="805" y="152" text-anchor="middle" font-size="11">(from .env, GROQ key)</text>
+
+<rect x="740" y="235" width="130" height="85" rx="8" fill="#f3e5f5" stroke="#8e24aa"/>
+<text x="805" y="258" text-anchor="middle" font-weight="bold">PVC</text>
+<text x="805" y="275" text-anchor="middle" font-size="11">shopping-agent-data</text>
+<text x="805" y="290" text-anchor="middle" font-size="11">1Gi, ReadWriteOnce</text>
+<text x="805" y="305" text-anchor="middle" font-size="11">/app/resources/store.db</text>
+
+<rect x="440" y="500" width="200" height="60" rx="8" fill="#eee" stroke="#666"/>
+<text x="540" y="525" text-anchor="middle" font-weight="bold">GroqCloud</text>
+<text x="540" y="543" text-anchor="middle" font-size="11">openai/gpt-oss-120b (HTTPS)</text>
+
+<g stroke="#444" stroke-width="1.5" fill="none" marker-end="url(#a)">
+<path d="M120 255H175"/>
+<path d="M335 255H390"/>
+<path d="M740 132H690"/>
+<path d="M690 277H740"/>
+<path d="M540 335V500" stroke-dasharray="5"/>
+</g>
+<text x="128" y="247" font-size="10" fill="#444">port-forward</text>
+<text x="352" y="247" font-size="10" fill="#444">:8501</text>
+<text x="700" y="124" font-size="10" fill="#444">envFrom</text>
+<text x="700" y="269" font-size="10" fill="#444">mount</text>
+<text x="548" y="420" font-size="11" fill="#444">egress (chat completions)</text>
+
+<rect x="175" y="345" width="190" height="105" rx="8" fill="#fffbe6" stroke="#b59b00"/>
+<text x="270" y="366" text-anchor="middle" font-weight="bold">Not configured yet</text>
+<text x="270" y="385" text-anchor="middle" font-size="11">liveness probe</text>
+<text x="270" y="402" text-anchor="middle" font-size="11">Ingress / TLS</text>
+<text x="270" y="419" text-anchor="middle" font-size="11">autoscaling, NetworkPolicy</text>
+<text x="270" y="436" text-anchor="middle" font-size="11">server database (Postgres)</text>
+
+<text x="20" y="590" font-size="11" fill="#666">Source: k8s/deployment.yaml. Created using Anthropic Claude; keep internal until reviewed.</text>
+</svg>
